@@ -1,6 +1,5 @@
 package se.lexicon.sindre;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class App
@@ -12,6 +11,7 @@ public class App
         double nummer2;
         boolean stop = true;
         String rmetod;
+        String[] räknesätt = new String[] {"+","-","*","/"};
 
         System.out.println("***Miniräknare***\nSkriv ditt första tal");
         nummer1 = convertDouble("s", 1);
@@ -19,7 +19,7 @@ public class App
 
         while(stop){
             System.out.println("Välj räknemetod mellan +, -, /, *");
-            rmetod = myInput.next();
+            rmetod = compareStringInput(räknesätt);
             System.out.println("Skriv ditt andra tal");
             nummer2 = convertDouble("s", 1);
 
@@ -62,8 +62,7 @@ public class App
     public static double Div(double a, double b){ return a / b;}
     public static double Add(double a, double b){ return a + b;}
     public static double Mul(double a, double b){ return a * b;}
-    public static double convertDouble(String a, double output)
-    {
+    public static double convertDouble(String a, double output) {
         boolean loop = true;
         while(loop){
             try{
@@ -76,6 +75,23 @@ public class App
             }
         }
         return output;
+    }
+
+    public static String compareStringInput(String[] arr){
+        boolean loops = true;
+        String check = "s";
+        while(loops){
+            check = myInput.next();
+            for(String element : arr){
+                if(element.equals(check)){
+                    loops = false;
+                    return check;
+                }
+            }
+            System.out.println("Fel input, försök igen");
+
+        }
+        return check;
     }
 
 }
